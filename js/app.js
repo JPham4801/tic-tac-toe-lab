@@ -39,7 +39,7 @@ const messageEl = document.querySelector("#message");
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
     board = ["", "", "", "", "", "", "", "", ""];
-    turn = "X";
+    turn = "O";
     winner = false;
     tie = false;
 };
@@ -65,13 +65,13 @@ const updateMessage = () => {
     }
 };
 
-const handleClick = (event) => {
+const handleClick = (squareIndex) => {
     if (winner === true || tie === true) {
         console.log("game over");
-    } else if (event.target.innerText === "") {
-        placePiece(event.target.id);
+    } else if (squareIndex.target.innerText === "") {
+        placePiece(squareIndex.target.id);
         checkForWinner();
-    } else if (event.target.innerText !== "") {
+    } else if (squareIndex.target.innerText !== "") {
         return;
     }
 };
@@ -79,12 +79,35 @@ const handleClick = (event) => {
 const placePiece = (index) => {
     squareEls[index].innerText = turn;
     board[index] = turn;
-    console.log(board);
+    // console.log(board);
 };
 
 const checkForWinner = () => {
+    // let test = [];
+    // winningCombos[4].forEach((element) =>{
+    //     test.push(board[element]);
+    //     if(
+    //         board[element] !== '' &&
+    //         test[0] === test[1] &&
+    //         test[0] === test[2]
+    //     ){
+    //         console.log('Winner!');
+    //     }
+    // })
+    // test = [];
     for (let i = 0; i < winningCombos.length; i++) {
-        // ! left off
+        let test = [];
+        winningCombos[i].forEach((element) => {
+            test.push(board[element]);
+            if (
+                board[element] !== "" &&
+                test[0] === test[1] &&
+                test[0] === test[2]
+            ) {
+                console.log("Winner!");
+            }
+        });
+        test = [];
     }
 };
 
