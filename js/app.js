@@ -38,7 +38,7 @@ const messageEl = document.querySelector("#message");
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
-    board = ["", "", "", "", "", "", "", "", ""];
+    board = ["1", "", "", "4", "5", "6", "", "", "9"];
     turn = "O";
     winner = false;
     tie = false;
@@ -71,6 +71,7 @@ const handleClick = (squareIndex) => {
     } else if (squareIndex.target.innerText === "") {
         placePiece(squareIndex.target.id);
         checkForWinner();
+        checkForTie();
     } else if (squareIndex.target.innerText !== "") {
         return;
     }
@@ -83,31 +84,32 @@ const placePiece = (index) => {
 };
 
 const checkForWinner = () => {
-    // let test = [];
-    // winningCombos[4].forEach((element) =>{
-    //     test.push(board[element]);
-    //     if(
-    //         board[element] !== '' &&
-    //         test[0] === test[1] &&
-    //         test[0] === test[2]
-    //     ){
-    //         console.log('Winner!');
-    //     }
-    // })
-    // test = [];
     for (let i = 0; i < winningCombos.length; i++) {
-        let test = [];
+        let testWinner = [];
         winningCombos[i].forEach((element) => {
-            test.push(board[element]);
+            testWinner.push(board[element]);
             if (
                 board[element] !== "" &&
-                test[0] === test[1] &&
-                test[0] === test[2]
+                testWinner[0] === testWinner[1] &&
+                testWinner[0] === testWinner[2]
             ) {
+                winner = true;
                 console.log("Winner!");
             }
         });
-        test = [];
+        testWinner = [];
+    }
+};
+
+const checkForTie = () => {
+    if (winner === true) {
+        return;
+    }
+
+    for (let i = 0; i < board.length; i++) {
+        if(board[i] === ""){
+            // ! left off
+        }
     }
 };
 
