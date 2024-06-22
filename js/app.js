@@ -101,17 +101,27 @@ const checkForWinner = () => {
     }
 };
 
-const checkForTie = () => {
-    if (winner === true) {
-        return;
+const checkForTie = () =>{
+    if(winner === true){
+        return
+    } else if(board.includes("")){
+        return
+    } else{
+        tie = true;
     }
+}
 
-    for (let i = 0; i < board.length; i++) {
-        if(board[i] === ""){
-            // ! left off
+const switchPlayerTurn = () = =>{
+    if(winner === true){
+        return
+    } else if(winner === false){
+        if(turn === 'X'){
+            turn === 'O'
+        } else if(turn === 'O'){
+            turn === 'X'
         }
     }
-};
+}
 
 init();
 render();
