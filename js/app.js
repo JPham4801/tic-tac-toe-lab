@@ -35,11 +35,12 @@ let tie;
 /*------------------------ Cached Element References ------------------------*/
 const squareEls = document.querySelectorAll(".sqr");
 const messageEl = document.querySelector("#message");
+const resetBtnEl = document.querySelector("#reset");
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
-    board = ["1", "", "", "4", "5", "6", "", "", "9"];
-    turn = "O";
+    board = ["", "", "", "", "", "", "", "", ""];
+    turn = "X";
     winner = false;
     tie = false;
 };
@@ -72,6 +73,8 @@ const handleClick = (squareIndex) => {
         placePiece(squareIndex.target.id);
         checkForWinner();
         checkForTie();
+        switchPlayerTurn();
+        render();
     } else if (squareIndex.target.innerText !== "") {
         return;
     }
@@ -108,18 +111,17 @@ const checkForTie = () =>{
         return
     } else{
         tie = true;
+        console.log('tie');
     }
 }
 
-const switchPlayerTurn = () = =>{
+const switchPlayerTurn = () =>{
     if(winner === true){
         return
-    } else if(winner === false){
-        if(turn === 'X'){
-            turn === 'O'
-        } else if(turn === 'O'){
-            turn === 'X'
-        }
+    } else if(turn === 'X'){
+        turn = 'O'
+    } else if(turn === 'O'){
+        turn = 'X'
     }
 }
 
@@ -128,3 +130,4 @@ render();
 
 /*----------------------------- Event Listeners -----------------------------*/
 document.querySelector(".board").addEventListener("click", handleClick);
+document.addEventListener("click", console.log('reset hit!'));
